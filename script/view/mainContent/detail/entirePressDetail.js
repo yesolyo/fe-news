@@ -1,4 +1,4 @@
-import { $, renderMaker } from "../../../utils/dom.js";
+import { $ } from "../../../utils/dom.js";
 import { category } from "../../../constants/dom.js";
 
 //버튼 조작
@@ -70,38 +70,55 @@ const insertMainContent = ({ MediaInfo, MainContent, SubContent }) => {
   insertHeadlineData(SubContent);
 };
 
-//돔 조작
-export const reciveDetailData = (mediaDetailData) => {
-  const { mediaInfo, mainContent, subContent } = mediaDetailData[category.economy][0];
-  insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
-  onDetailBtnEvents({ rightBtn: $(".detail_btn-right"), leftBtn: $(".detail_btn-left"), categoryList: $(".news_category-bar"), data: mediaDetailData });
+//돔 조작;
+
+let mainContentObj = {
+  currentPage: 0,
+  categoryMenu: category.economy,
 };
-
 const onDetailBtnEvents = ({ rightBtn, leftBtn, categoryList, data }) => {
-  let currentPage = 0;
-  let categoryMenu = category.economy;
-
   categoryList.addEventListener("click", (event) => {
-    const { mediaInfo, mainContent, subContent } = data[categoryMenu][currentPage];
-    categoryMenu = event.target.textContent.trim();
+    mainContentObj.categoryMenu = event.target.textContent.trim();
+    const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
     insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
   });
 
   rightBtn.addEventListener("click", () => {
-    if (currentPage === data[categoryMenu].length) return;
+    if (mainContentObj.currentPage === data[mainContentObj.categoryMenu].length) return;
     else {
-      currentPage += 1;
-      const { mediaInfo, mainContent, subContent } = data[categoryMenu][currentPage];
+      mainContentObj.currentPage += 1;
+      const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
       insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
     }
   });
 
   leftBtn.addEventListener("click", () => {
-    if (currentPage === 0) return;
+    if (mainContentObj.currentPage === 0) return;
     else {
-      currentPage -= 1;
-      const { mediaInfo, mainContent, subContent } = data[categoryMenu][currentPage];
+      mainContentObj.currentPage -= 1;
+      const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
       insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
     }
   });
+};
+
+const updateMainContent = ({ interval, data }) => {
+  let startTime = null;
+  const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
+  const changeTime = (timestamp) => {
+    if (!startTime) startTime = timestamp;
+    const progress = timestamp - startTime;
+    if (progress >= interval) {
+      insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
+      startTime = timestamp;
+    }
+    requestAnimationFrame(changeTime);
+  };
+  changeTime();
+};
+
+export const reciveDetailData = (mediaDetailData) => {
+  const { mediaInfo, mainContent, subContent } = mediaDetailData[mainContentObj.categoryMenu][mainContentObj.currentPage];
+  insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
+  onDetailBtnEvents({ rightBtn: $(".detail_btn-right"), leftBtn: $(".detail_btn-left"), categoryList: $(".news_category-bar"), data: mediaDetailData });
 };
