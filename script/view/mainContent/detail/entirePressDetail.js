@@ -3,8 +3,12 @@ import { category } from "../../../constants/dom.js";
 
 //버튼 조작
 export const changeNewsDetailColor = () => {
-  const detailCircle = document.getElementById("company__view_detail").contentDocument.querySelector("path");
-  const logoCircle = document.getElementById("company__view_logo").contentDocument.querySelector("path");
+  const detailCircle = document
+    .getElementById("company__view_detail")
+    .contentDocument.querySelector("path");
+  const logoCircle = document
+    .getElementById("company__view_logo")
+    .contentDocument.querySelector("path");
   detailCircle.addEventListener("click", () => {
     detailCircle.setAttribute("fill", "#4362d0");
     logoCircle.setAttribute("fill", "#d2dae0");
@@ -17,8 +21,12 @@ export const changeNewsDetailColor = () => {
 };
 
 const changeNewsDetailDisplay = () => {
-  const detailCircle = document.getElementById("company__view_detail").contentDocument.querySelector("path");
-  const logoCircle = document.getElementById("company__view_logo").contentDocument.querySelector("path");
+  const detailCircle = document
+    .getElementById("company__view_detail")
+    .contentDocument.querySelector("path");
+  const logoCircle = document
+    .getElementById("company__view_logo")
+    .contentDocument.querySelector("path");
   const allDisplay = $(".news-company__grid");
   const detailDisplay = $(".news-company__detail");
   detailCircle.addEventListener("click", () => {
@@ -60,8 +68,10 @@ const insertMediaMainData = (mainContent) => {
 const insertHeadlineData = (subContent) => {
   const { subNewsList, noticeMessage } = subContent;
   const headLineNews = $(".display_headline-news");
-  headLineNews.innerHTML = subNewsList.reduce((acc, data) => acc + `<span class= "headline-news">${data}</span>`, "");
-  headLineNews.innerHTML += `<span class= "notice-message">${noticeMessage}</span>`;
+  headLineNews.innerHTML = subNewsList.reduce(
+    (acc, data) => acc + `<span class= "headline-news">${data}</span>`,
+    ""
+  );
 };
 
 const insertMainContent = ({ MediaInfo, MainContent, SubContent }) => {
@@ -79,16 +89,27 @@ let mainContentObj = {
 const onDetailBtnEvents = ({ rightBtn, leftBtn, categoryList, data }) => {
   categoryList.addEventListener("click", (event) => {
     mainContentObj.categoryMenu = event.target.textContent.trim();
-    const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
-    insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
+    const { mediaInfo, mainContent, subContent } =
+      data[mainContentObj.categoryMenu][mainContentObj.currentPage];
+    insertMainContent({
+      MediaInfo: mediaInfo,
+      MainContent: mainContent,
+      SubContent: subContent,
+    });
   });
 
   rightBtn.addEventListener("click", () => {
-    if (mainContentObj.currentPage === data[mainContentObj.categoryMenu].length) return;
+    if (mainContentObj.currentPage === data[mainContentObj.categoryMenu].length)
+      return;
     else {
       mainContentObj.currentPage += 1;
-      const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
-      insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
+      const { mediaInfo, mainContent, subContent } =
+        data[mainContentObj.categoryMenu][mainContentObj.currentPage];
+      insertMainContent({
+        MediaInfo: mediaInfo,
+        MainContent: mainContent,
+        SubContent: subContent,
+      });
     }
   });
 
@@ -96,20 +117,30 @@ const onDetailBtnEvents = ({ rightBtn, leftBtn, categoryList, data }) => {
     if (mainContentObj.currentPage === 0) return;
     else {
       mainContentObj.currentPage -= 1;
-      const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
-      insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
+      const { mediaInfo, mainContent, subContent } =
+        data[mainContentObj.categoryMenu][mainContentObj.currentPage];
+      insertMainContent({
+        MediaInfo: mediaInfo,
+        MainContent: mainContent,
+        SubContent: subContent,
+      });
     }
   });
 };
 
 const updateMainContent = ({ interval, data }) => {
   let startTime = null;
-  const { mediaInfo, mainContent, subContent } = data[mainContentObj.categoryMenu][mainContentObj.currentPage];
+  const { mediaInfo, mainContent, subContent } =
+    data[mainContentObj.categoryMenu][mainContentObj.currentPage];
   const changeTime = (timestamp) => {
     if (!startTime) startTime = timestamp;
     const progress = timestamp - startTime;
     if (progress >= interval) {
-      insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
+      insertMainContent({
+        MediaInfo: mediaInfo,
+        MainContent: mainContent,
+        SubContent: subContent,
+      });
       startTime = timestamp;
     }
     requestAnimationFrame(changeTime);
@@ -118,7 +149,17 @@ const updateMainContent = ({ interval, data }) => {
 };
 
 export const reciveDetailData = (mediaDetailData) => {
-  const { mediaInfo, mainContent, subContent } = mediaDetailData[mainContentObj.categoryMenu][mainContentObj.currentPage];
-  insertMainContent({ MediaInfo: mediaInfo, MainContent: mainContent, SubContent: subContent });
-  onDetailBtnEvents({ rightBtn: $(".detail_btn-right"), leftBtn: $(".detail_btn-left"), categoryList: $(".news_category-bar"), data: mediaDetailData });
+  const { mediaInfo, mainContent, subContent } =
+    mediaDetailData[mainContentObj.categoryMenu][mainContentObj.currentPage];
+  insertMainContent({
+    MediaInfo: mediaInfo,
+    MainContent: mainContent,
+    SubContent: subContent,
+  });
+  onDetailBtnEvents({
+    rightBtn: $(".detail_btn-right"),
+    leftBtn: $(".detail_btn-left"),
+    categoryList: $(".news_category-bar"),
+    data: mediaDetailData,
+  });
 };
