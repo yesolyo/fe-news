@@ -1,39 +1,25 @@
-# 1주차
-
-## 학습목표
-
-- 복잡한 웹서비스를 분석하고, 프로그래밍을 설계할 수 있다.
-- ES Modules를 활용한 모듈방식의 프로그래밍을 할 수 있다.
-
-## 우선 순위 정리
-
-1. 프로그래밍 설계
-
-- [x] [화면 구성도 구성](https://www.figma.com/file/CeLtP3ZE8xtxfxKTa6CqVd/%EB%89%B4%EC%8A%A4%EC%8A%A4%ED%83%A0%EB%93%9C-%EA%B5%AC%EC%A1%B0?node-id=0%3A1&t=TkqKiSIhQUasnhMx-1)
-- [x] [Dom tree 설계](https://www.figma.com/file/CeLtP3ZE8xtxfxKTa6CqVd/%EB%89%B4%EC%8A%A4%EC%8A%A4%ED%83%A0%EB%93%9C-%EA%B5%AC%EC%A1%B0?node-id=0%3A1&t=TkqKiSIhQUasnhMx-1)
-- [x] [file tree 설계](https://amber-pyrite-e34.notion.site/w1-61077171d2cc45b0aaf01d156870f52f)
-- [x] [feature list 설계](https://amber-pyrite-e34.notion.site/w1-61077171d2cc45b0aaf01d156870f52f)
-
-2. 개념 정리
-
-- [x] [루카스 용어 공부](https://amber-pyrite-e34.notion.site/2-W01-a8a27f0d709947dba986858b5fb82a01)
-
-- [ ] [prototype 공부](https://amber-pyrite-e34.notion.site/6-f4b7342dec3b4ba38831588ee5170efd)
-- [ ] promise 공부
-- [ ] fetch 공부
-
-3. 데이터 흭득
-
-- [ ] js로 dom api 활용
-- [ ] json 데이터로 구성
-
-4. 화면 구현
-
-- [x] 기본 요소 셋팅
-- [x] header 구성
-- [x] article 구성
-- [x] section 구성
-
-5. 완성 화면
+# 📑 NewsStand
 
 ![완성 화면](https://user-images.githubusercontent.com/104904719/232360059-9413f696-c6c9-4ae2-a72a-9f5e1d74c9cd.gif)
+
+2023 코드스쿼드 개인 프로젝트로 네이버의 뉴스스탠드를 모티브로 제작되었습니다.
+
+# 📌 NewsStand에서는 이런 것들이 가능해요
+
+**📑 하나, 중요한 헤드라인만 확인이 가능해요**
+<p>롤링 바를 통해서 중요한 헤드라인을 확인 할 수 있습니다.</p>
+<p>만약, 해당 해드라인을 자세히 살펴보고 싶다면, 마우스를 대보세요. 자세하게 확인이 가능합니다.</p>
+
+**📑 둘, 전체 언론사 로고 확인이 가능해요**
+<p>전체 언론사의 순서는 새로고침할 때마다 변경할 수 있습니다.</p>
+
+**📑 셋, 뉴스 리스트를 통해서 각 카테고리에 맞는 뉴스 확인이 가능해요**
+<p>뉴스 리스트 아이콘을 클릭하면, 카테고리에 맞는 뉴스 정보들을 확인할 수 있습니다.</p>
+
+**📑 넷, 언론사를 구독이 가능해요**
+<p>언론사를 구독하면, 본인이 구독한 언론사만 확인이 가능해요</p>
+
+# 📌 NewsStand에서는 이런 기술로 만들어졌어요.
+
+- Vanila JavaScript, SCSS
+- JSON Server
